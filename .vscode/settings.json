@@ -1,0 +1,28 @@
+{
+  "files.autoSave": "afterDelay",
+  "files.autoSaveDelay": 500,
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll": "explicit"
+  },
+  "typescript.preferences.importModuleSpecifier": "relative",
+  "vue.server.hybridMode": true,
+  "nuxt.isNuxtApp": true,
+  "files.watcherExclude": {
+    "**/.git/objects/**": true,
+    "**/.git/subtree-cache/**": true,
+    "**/node_modules/**": true,
+    "**/.nuxt/**": true,
+    "**/dist/**": true,
+    "**/.output/**": true
+  },
+  "search.exclude": {
+    "**/.nuxt": true,
+    "**/dist": true,
+    "**/.output": true,
+    "**/node_modules": true
+  },
+  "files.associations": {
+    "*.vue": "vue"
+  }
+}

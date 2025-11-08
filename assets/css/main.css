@@ -1,0 +1,36 @@
+:root {
+  --primary-50: #f0f2f8;
+  --primary-100: #e1e6f1;
+  --primary-500: #26304d;
+  --primary-600: #1e273d;
+  --primary-700: #1a2237;
+  --primary-800: #161e2f;
+  --primary-900: #0f1419;
+}
+
+body {
+  font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, sans-serif;
+}
+
+/* Custom component styles */
+.primary-bg {
+  background-color: #26304d;
+}
+
+.primary-text {
+  color: #26304d;
+}
+
+/* Animations */
+@keyframes blob {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+  }
+  33% {
+    transform: translate(30px, -50px) scale(1.1);
+  }
+  66% {
+    transform: translate(-20px, 20px) scale(0.9);
+  }
+}
