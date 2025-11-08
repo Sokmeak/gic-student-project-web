@@ -1,36 +1,35 @@
+@import "tailwindcss";
+@import "@nuxt/ui";
+
+@theme {
+  --font-sans: 'Public Sans', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+
+@theme static {
+
+  /* Define new custom color */
+  --color-brand-50: #d4d6db;
+  --color-brand-100: #7d8394;
+  --color-brand-200: #676e82;
+  --color-brand-300: #515971;
+  --color-brand-400: #3c455f;
+  --color-brand-500: #26304d; 
+  --color-brand-600: #222b45;
+  --color-brand-700: #1e263e;
+  --color-brand-800: #1b2236;
+  --color-brand-950: #171d2e;
+}
+
 :root {
-  --primary-50: #f0f2f8;
-  --primary-100: #e1e6f1;
-  --primary-500: #26304d;
-  --primary-600: #1e273d;
-  --primary-700: #1a2237;
-  --primary-800: #161e2f;
-  --primary-900: #0f1419;
+  --ui-primary: var(--ui-color-brand-500);
+  --ui-secondary: var(--ui-color-secondary-500);
+  --ui-success: var(--ui-color-success-500);
+  --ui-info: var(--ui-color-info-500);
+  --ui-warning: var(--ui-color-warning-500);
+  --ui-error: var(--ui-color-error-500);
 }
 
-body {
-  font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont,
-    "Segoe UI", Roboto, sans-serif;
-}
-
-/* Custom component styles */
-.primary-bg {
-  background-color: #26304d;
-}
-
-.primary-text {
-  color: #26304d;
-}
-
-/* Animations */
-@keyframes blob {
-  0%, 100% {
-    transform: translate(0, 0) scale(1);
-  }
-  33% {
-    transform: translate(30px, -50px) scale(1.1);
-  }
-  66% {
-    transform: translate(-20px, 20px) scale(0.9);
-  }
+.dark {
+  --ui-primary: var(--ui-color-primary-200);
 }
