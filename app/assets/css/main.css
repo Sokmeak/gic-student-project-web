@@ -8,6 +8,8 @@
 
 @theme static {
 
+  /* Override default nuxt styling */
+
   /* Define new custom color */
   --color-brand-50: #d4d6db;
   --color-brand-100: #7d8394;
@@ -28,6 +30,13 @@
   --ui-info: var(--ui-color-info-500);
   --ui-warning: var(--ui-color-warning-500);
   --ui-error: var(--ui-color-error-500);
+
+  --ui-text-dimmed: var(--ui-color-neutral-400);
+  --ui-text-muted: var(--ui-color-neutral-500);
+  --ui-text-toned: var(--ui-color-neutral-600);
+  --ui-text: var(--ui-color-brand-600);
+  --ui-text-highlighted: var(--ui-color-brand-850);
+  --ui-text-inverted: var(--ui-color-brand-600);
 }
 
 .dark {
