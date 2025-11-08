@@ -1,14 +1,12 @@
 {
-  "files.autoSave": "afterDelay",
-  "files.autoSaveDelay": 500,
+  // "files.autoSave": "afterDelay",
+  // "files.autoSaveDelay": 500,
   "editor.formatOnSave": true,
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": "explicit",
     "source.organizeImports": "never"
   },
   "typescript.preferences.importModuleSpecifier": "relative",
-  "vue.server.hybridMode": true,
-  "nuxt.isNuxtApp": true,
   "files.watcherExclude": {
     "**/.git/objects/**": true,
     "**/.git/subtree-cache/**": true,
@@ -40,9 +38,8 @@
       "(?:'|\"|`)([^']*)(?:'|\"|`)"
     ]
   ],
-  // Disable the default formatter, use eslint instead
-  "prettier.enable": false,
   // Auto fix
+  "prettier.enable": false,
   // Silent the stylistic rules in your IDE, but still auto fix them
   "eslint.rules.customizations": [
     {
@@ -119,5 +116,6 @@
     "scss",
     "pcss",
     "postcss"
-  ]
+  ],
+  "eslint.useFlatConfig": true
 }
