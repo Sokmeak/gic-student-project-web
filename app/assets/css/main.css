@@ -2,12 +2,11 @@
 @import "@nuxt/ui";
 
 @theme {
-  --font-sans: 'Public Sans', system-ui, sans-serif;
-  --font-mono: 'JetBrains Mono', monospace;
+  --font-sans: "Roboto", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
 }
 
 @theme static {
-
   /* Override default nuxt styling */
 
   /* Define new custom color */
@@ -16,7 +15,7 @@
   --color-brand-200: #676e82;
   --color-brand-300: #515971;
   --color-brand-400: #3c455f;
-  --color-brand-500: #26304d; 
+  --color-brand-500: #26304d;
   --color-brand-600: #222b45;
   --color-brand-700: #1e263e;
   --color-brand-800: #1b2236;

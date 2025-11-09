@@ -1,14 +1,21 @@
-<script setup>
-
-</script>
-
 <template>
-  <div class="bg-gradient-to-br from-slate-50 to-slate-100">
-    Hello
-      <UBanner title="This is a banner with an important message." />
-    <UChip>
-      <UButton icon="i-lucide-mail" color="neutral" variant="subtle" />
-    </UChip>
-      <UButton class="font-bold rounded-full">Button</UButton>
+  <div>
+    <HeroSection />
+    <FeaturesSection />
+    <FeaturedProjectsSection />
+    <CTASection />
   </div>
 </template>
+
+<script setup>
+useHead({
+  title: "GIC Student Portal - Showcase Your Innovation",
+  meta: [
+    {
+      name: "description",
+      content:
+        "Join thousands of talented GIC students showcasing amazing projects. From AI innovations to mobile apps, discover the future of technology.",
+    },
+  ],
+});
+</script>

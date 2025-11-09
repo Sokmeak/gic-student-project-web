@@ -1,16 +1,44 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   compatibilityDate: "2025-07-15",
+  srcDir: "app",
   devtools: { enabled: true },
-  modules: ["@nuxt/ui", "@pinia/nuxt", "@vueuse/nuxt", "@nuxt/eslint"],
-  css: ['~/assets/css/main.css'],
+  modules: [
+    "@nuxt/ui",
+    "@nuxt/image",
+    "@pinia/nuxt",
+    "@vueuse/nuxt",
+    "@nuxt/eslint",
+  ],
+  css: ["~/assets/css/main.css"],
+
+  // Add Google Fonts
+  app: {
+    head: {
+      link: [
+        {
+          rel: "preconnect",
+          href: "https://fonts.googleapis.com",
+        },
+        {
+          rel: "preconnect",
+          href: "https://fonts.gstatic.com",
+          crossorigin: "anonymous",
+        },
+        {
+          rel: "stylesheet",
+          href: "https://fonts.googleapis.com/css2?family=Epilogue:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap",
+        },
+      ],
+    },
+  },
   // Vite configuration
   vite: {
     server: {
       hmr: {
         protocol: "ws",
         host: "localhost",
-        port: 24678,
+        port: 24679,
       },
     },
   },
@@ -39,26 +67,12 @@ export default defineNuxtConfig({
   },
 
   // Component auto-discovery
-  components: {
-    dirs: [
-      {
-        path: "~/components",
-        pathPrefix: false,
-      },
-    ],
-  },
+  components: [
+    {
+      path: "~/components",
+      pathPrefix: false,
+    },
+  ],
 
-  ui: {
-    theme: {
-      colors: [
-        'primary',
-        'secondary',
-        'tertiary',
-        'info',
-        'success',
-        'warning',
-        'error'
-      ]
-    }
-  }
+  ui: {},
 });

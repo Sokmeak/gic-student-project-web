@@ -1,6 +1,6 @@
 <template>
   <section
-    class="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600"
+    class="py-20 px-4 sm:px-6 lg:px-8 bg-slate-800 border-t border-slate-800"
   >
     <UContainer>
       <div class="text-center text-white space-y-8 max-w-2xl mx-auto">
@@ -15,16 +15,14 @@
           <UButton
             size="lg"
             class="rounded-full"
-            color="white"
-            variant="soft"
+            color="primary"
             icon="i-heroicons-rocket-launch"
           >
             Submit Your Project
           </UButton>
           <UButton
             size="lg"
-            variant="outline"
-            color="white"
+            color="success"
             class="rounded-full"
             icon="i-heroicons-calendar"
           >

@@ -1,236 +1,206 @@
 <template>
-  <nav
-    class="bg-white/90 backdrop-blur-md border-b border-gray-200 sticky top-0 z-50 shadow-sm"
-  >
-    <UContainer class="flex items-center justify-between h-16 px-4">
+  <nav class="sticky top-0 z-50 bg-white border-b border-gray-200 shadow-sm">
+    <div
+      class="flex items-center justify-between h-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full"
+    >
       <!-- Logo Section -->
-      <NuxtLink to="/" class="flex items-center space-x-3 group">
-        <div
-          class="w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl flex items-center justify-center group-hover:scale-105 transition-transform"
-        >
-          <UIcon name="i-heroicons-academic-cap" class="w-6 h-6 text-white" />
-        </div>
-        <div class="hidden sm:block">
-          <span class="text-xl font-bold text-gray-900">GIC</span>
-          <span class="text-sm text-gray-600 block leading-3"
-            >Student Portal</span
-          >
-        </div>
+      <NuxtLink to="/" class="flex items-center shrink-0">
+        <NuxtImg
+          src="/gic-logo.jpg"
+          alt="GIC Student Portal"
+          width="150"
+          height="40"
+          class="object-contain hover:opacity-80 transition-opacity duration-200"
+        />
       </NuxtLink>
 
       <!-- Desktop Navigation -->
-      <div class="hidden lg:flex items-center space-x-8">
-        <NuxtLink
+      <div class="hidden lg:flex items-center space-x-1 flex-1 mx-8">
+        <NavLink
           v-for="item in navigationItems"
           :key="item.to"
           :to="item.to"
-          class="text-gray-700 hover:text-blue-600 font-medium transition-colors relative group"
-          active-class="text-blue-600"
-        >
-          {{ item.label }}
-          <span
-            class="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-600 transition-all group-hover:w-full"
-          ></span>
-        </NuxtLink>
+          :label="item.label"
+          :is-active="isActiveRoute(item.to)"
+        />
       </div>
 
-      <!-- Search Bar -->
-      <div class="hidden md:flex flex-1 max-w-md mx-8">
-        <div class="relative w-full">
-          <UIcon
-            name="i-heroicons-magnifying-glass"
-            class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4"
-          />
-          <input
-            v-model="searchQuery"
-            type="text"
-            placeholder="Search projects, students..."
-            class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
-            @keyup.enter="handleSearch"
-          />
-          <div
-            v-if="searchQuery"
-            class="absolute right-3 top-1/2 transform -translate-y-1/2"
-          >
-            <button
-              @click="clearSearch"
-              class="text-gray-400 hover:text-gray-600"
-            >
-              <UIcon name="i-heroicons-x-mark" class="w-4 h-4" />
-            </button>
-          </div>
-        </div>
+      <!-- Search Bar - All Screens -->
+      <div class="flex-1 max-w-sm mx-2 sm:mx-6">
+        <SearchBar
+          v-model="searchQuery"
+          @search="handleSearch"
+          @clear="clearSearch"
+        />
       </div>
 
-      <!-- Action Buttons -->
-      <div class="flex items-center space-x-4">
-        <!-- Theme Toggle -->
-        <button
-          @click="toggleTheme"
-          class="p-2 rounded-xl hover:bg-gray-100 transition-colors"
-          :title="`Switch to ${isDark ? 'light' : 'dark'} mode`"
-        >
-          <UIcon
-            :name="isDark ? 'i-heroicons-sun' : 'i-heroicons-moon'"
-            class="w-5 h-5 text-gray-600"
-          />
-        </button>
-
-        <!-- Notifications -->
-        <button
-          class="relative p-2 rounded-xl hover:bg-gray-100 transition-colors"
-        >
-          <UIcon name="i-heroicons-bell" class="w-5 h-5 text-gray-600" />
-          <span
-            class="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full"
-          ></span>
-        </button>
-
-        <!-- User Menu -->
-        <UDropdown :items="userMenuItems" class="hidden sm:block">
-          <UAvatar
-            src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=40&h=40&fit=crop&crop=face"
-            alt="User"
-            size="sm"
-            class="cursor-pointer hover:ring-2 hover:ring-blue-500 transition-all"
-          />
-        </UDropdown>
-
-        <!-- Mobile Menu Button -->
-        <button
-          @click="toggleMobileMenu"
-          class="lg:hidden p-2 rounded-xl hover:bg-gray-100 transition-colors"
-        >
-          <UIcon
-            :name="mobileMenuOpen ? 'i-heroicons-x-mark' : 'i-heroicons-bars-3'"
-            class="w-6 h-6 text-gray-600"
-          />
-        </button>
+      <!-- Right Section: Notifications & User Profile -->
+      <div class="hidden md:block">
+        <UserMenu
+          :is-authenticated="isAuthenticated"
+          :user="user"
+          @logout="handleLogout"
+        />
       </div>
-    </UContainer>
+
+      <!-- Mobile Menu Button -->
+      <UButton
+        icon="i-heroicons-bars-3-20-solid"
+        color="gray"
+        variant="ghost"
+        size="md"
+        class="lg:hidden"
+        :ui="{ rounded: 'rounded-lg' }"
+        @click="mobileMenuOpen = !mobileMenuOpen"
+      >
+        <template v-if="mobileMenuOpen">
+          <UIcon name="i-heroicons-x-mark-20-solid" />
+        </template>
+      </UButton>
+    </div>
 
     <!-- Mobile Menu -->
-    <div
-      v-if="mobileMenuOpen"
-      class="lg:hidden border-t border-gray-200 bg-white/95 backdrop-blur-md"
+    <Transition
+      enter-active-class="transition ease-out duration-100"
+      enter-from-class="transform opacity-0 -translate-y-2"
+      enter-to-class="transform opacity-100 translate-y-0"
+      leave-active-class="transition ease-in duration-75"
+      leave-from-class="transform opacity-100 translate-y-0"
+      leave-to-class="transform opacity-0 -translate-y-2"
     >
-      <div class="px-4 py-4 space-y-3">
-        <NuxtLink
-          v-for="item in navigationItems"
-          :key="item.to"
-          :to="item.to"
-          @click="mobileMenuOpen = false"
-          class="block px-4 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600 rounded-xl font-medium transition-colors"
-          active-class="bg-blue-50 text-blue-600"
-        >
-          {{ item.label }}
-        </NuxtLink>
+      <div
+        v-if="mobileMenuOpen"
+        class="lg:hidden border-t border-gray-200 bg-white px-4 sm:px-6 lg:px-8"
+      >
+        <div class="border-t border-gray-200 py-4 space-y-2">
+          <!-- Mobile Navigation Links -->
+          <NavLink
+            v-for="item in navigationItems"
+            :key="item.to"
+            :to="item.to"
+            :label="item.label"
+            :is-active="isActiveRoute(item.to)"
+            mobile
+            mobile-class="w-full px-4 py-3 rounded-lg"
+            @click="mobileMenuOpen = false"
+          />
 
-        <!-- Mobile Search -->
-        <div class="px-4 py-2">
-          <div class="relative">
-            <UIcon
-              name="i-heroicons-magnifying-glass"
-              class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4"
-            />
-            <input
-              v-model="searchQuery"
-              type="text"
-              placeholder="Search projects, students..."
-              class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-              @keyup.enter="handleSearch"
-            />
-          </div>
-        </div>
+          <!-- Divider -->
+          <UDivider class="my-4" />
 
-        <!-- Mobile User Actions -->
-        <div class="px-4 py-2 space-y-2">
-          <button
-            class="w-full text-left px-4 py-3 text-gray-700 hover:bg-gray-50 rounded-xl"
-          >
-            Profile Settings
-          </button>
-          <button
-            class="w-full text-left px-4 py-3 text-gray-700 hover:bg-gray-50 rounded-xl"
-          >
-            My Projects
-          </button>
-          <button
-            class="w-full text-left px-4 py-3 text-red-600 hover:bg-red-50 rounded-xl"
-          >
-            Sign Out
-          </button>
+          <!-- Mobile User Actions -->
+          <template v-if="isAuthenticated">
+            <!-- Student Menu -->
+            <template v-if="authStore.isStudent">
+              <NuxtLink
+                to="/student"
+                class="flex items-center gap-2 px-4 py-3 rounded-lg hover:bg-gray-100 transition-colors"
+                @click="mobileMenuOpen = false"
+              >
+                <UIcon name="i-heroicons-chart-bar-square-20-solid" />
+                Dashboard
+              </NuxtLink>
+              <NuxtLink
+                to="/projects"
+                class="flex items-center gap-2 px-4 py-3 rounded-lg hover:bg-gray-100 transition-colors"
+                @click="mobileMenuOpen = false"
+              >
+                <UIcon name="i-heroicons-folder-20-solid" />
+                My Projects
+              </NuxtLink>
+            </template>
+
+            <!-- Teacher Menu -->
+            <template v-if="authStore.isTeacher">
+              <NuxtLink
+                to="/teacher"
+                class="flex items-center gap-2 px-4 py-3 rounded-lg hover:bg-gray-100 transition-colors"
+                @click="mobileMenuOpen = false"
+              >
+                <UIcon name="i-heroicons-chart-bar-square-20-solid" />
+                Dashboard
+              </NuxtLink>
+              <NuxtLink
+                to="/teacher/submissions"
+                class="flex items-center gap-2 px-4 py-3 rounded-lg hover:bg-gray-100 transition-colors"
+                @click="mobileMenuOpen = false"
+              >
+                <UIcon name="i-heroicons-inbox-stack-20-solid" />
+                Review Submissions
+              </NuxtLink>
+            </template>
+
+            <!-- Common Links -->
+            <UDivider class="my-2" />
+            <NuxtLink
+              to="/profile"
+              class="flex items-center gap-2 px-4 py-3 rounded-lg hover:bg-gray-100 transition-colors"
+              @click="mobileMenuOpen = false"
+            >
+              <UIcon name="i-heroicons-cog-6-tooth-20-solid" />
+              Settings
+            </NuxtLink>
+            <button
+              class="w-full flex items-center gap-2 px-4 py-3 rounded-lg hover:bg-red-50 text-red-600 transition-colors"
+              @click="handleLogout"
+            >
+              <UIcon name="i-heroicons-arrow-left-on-rectangle-20-solid" />
+              Sign Out
+            </button>
+          </template>
+          <template v-else>
+            <PresetButton
+              preset="signin"
+              to="/login"
+              class="w-full"
+              @click="mobileMenuOpen = false"
+            />
+            <PresetButton
+              preset="signup"
+              to="/signup"
+              class="w-full"
+              @click="mobileMenuOpen = false"
+            />
+          </template>
         </div>
       </div>
-    </div>
+    </Transition>
   </nav>
 </template>
 
 <script setup>
 import { ref, computed } from "vue";
-import { useColorMode } from "@vueuse/core";
+import { useRoute } from "vue-router";
+import { useAuthStore } from "~/stores/auth";
+import { useUiStore } from "~/stores/ui";
 
 // State
 const searchQuery = ref("");
 const mobileMenuOpen = ref(false);
-const colorMode = useColorMode();
+
+const route = useRoute();
+const authStore = useAuthStore();
+const uiStore = useUiStore();
 
 // Computed
-const isDark = computed(() => colorMode.value === "dark");
+const isAuthenticated = computed(() => authStore.isAuthenticated);
+const user = computed(() => authStore.currentUser);
 
 // Navigation items
 const navigationItems = [
   { label: "Home", to: "/" },
   { label: "Projects", to: "/projects" },
   { label: "Students", to: "/students" },
-  { label: "Dashboard", to: "/dashboard" },
+  { label: "Semesters", to: "/semesters" },
   { label: "About", to: "/about" },
 ];
 
-// User menu items
-const userMenuItems = [
-  [
-    {
-      label: "Profile",
-      avatar: {
-        src: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=40&h=40&fit=crop&crop=face",
-      },
-      click: () => navigateTo("/profile"),
-    },
-  ],
-  [
-    {
-      label: "My Projects",
-      icon: "i-heroicons-folder",
-      click: () => navigateTo("/my-projects"),
-    },
-    {
-      label: "Settings",
-      icon: "i-heroicons-cog-6-tooth",
-      click: () => navigateTo("/settings"),
-    },
-  ],
-  [
-    {
-      label: "Help & Support",
-      icon: "i-heroicons-question-mark-circle",
-      click: () => navigateTo("/help"),
-    },
-    {
-      label: "Sign out",
-      icon: "i-heroicons-arrow-left-on-rectangle",
-      click: () => console.log("Sign out"),
-    },
-  ],
-];
-
 // Methods
-const toggleTheme = () => {
-  colorMode.value = colorMode.value === "dark" ? "light" : "dark";
-};
-
-const toggleMobileMenu = () => {
-  mobileMenuOpen.value = !mobileMenuOpen.value;
+const isActiveRoute = (path) => {
+  if (path === "/") {
+    return route.path === "/";
+  }
+  return route.path.startsWith(path);
 };
 
 const handleSearch = () => {
@@ -244,11 +214,9 @@ const clearSearch = () => {
   searchQuery.value = "";
 };
 
-// Close mobile menu on route change
-watch(
-  () => useRoute().path,
-  () => {
-    mobileMenuOpen.value = false;
-  }
-);
+const handleLogout = async () => {
+  await authStore.logout();
+  mobileMenuOpen.value = false;
+  navigateTo("/");
+};
 </script>

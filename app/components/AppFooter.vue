@@ -19,7 +19,6 @@
             </p>
             <div class="flex space-x-4">
               <UButton
-                color="gray"
                 variant="ghost"
                 size="sm"
                 icon="i-heroicons-envelope"
@@ -32,9 +31,7 @@
 
           <!-- Quick Links -->
           <div>
-            <h3 class="text-lg font-semibold mb-4">
-              Quick Links
-            </h3>
+            <h3 class="text-lg font-semibold mb-4">Quick Links</h3>
             <ul class="space-y-3">
               <li>
                 <NuxtLink
@@ -73,22 +70,12 @@
 
           <!-- Programs -->
           <div>
-            <h3 class="text-lg font-semibold mb-4">
-              Programs
-            </h3>
+            <h3 class="text-lg font-semibold mb-4">Programs</h3>
             <ul class="space-y-3">
-              <li class="text-gray-400">
-                Computer Science
-              </li>
-              <li class="text-gray-400">
-                Information Technology
-              </li>
-              <li class="text-gray-400">
-                Digital Innovation
-              </li>
-              <li class="text-gray-400">
-                Data Science
-              </li>
+              <li class="text-gray-400">Computer Science</li>
+              <li class="text-gray-400">Information Technology</li>
+              <li class="text-gray-400">Digital Innovation</li>
+              <li class="text-gray-400">Data Science</li>
             </ul>
           </div>
         </div>
