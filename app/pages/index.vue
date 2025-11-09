@@ -13,16 +13,35 @@ const db = useHeroRotation({ origin, distance, timeOffset: multiplier[2] * durat
 const ops = useHeroRotation({ origin, distance, timeOffset: multiplier[3] * duration, duration })
 const tux = useHeroRotation({ origin, distance, timeOffset: multiplier[4] * duration, duration })
 const cool = useHeroRotation({ origin, distance, timeOffset: multiplier[5] * duration + 500, duration })
-const php = useHeroRotation({ origin, distance, timeOffset: multiplier[6] * duration + 1000, duration })
+const php = useHeroRotation({ origin, distance, timeOffset: multiplier[6] * duration + 1500, duration })
 </script>
 
 <template>
-  <section class="hero-section justify-around">
-    <div class="text">
-      <img src="/images/gic-logo-big.png" width="360" alt="gic-logo"> <h1>See what our students built!</h1> <h2>for students by students. ₍^.  ̫.^₎</h2>
+  <section class="hero-section justify-center md:items-center lg:items-start md:justify-center lg:justify-around flex flex-row md:flex-col lg:flex-row">
+    <div class="text relative bottom-25">
+      <img class="relative right-8 top-20" src="/images/gic-logo-big.png" width="600" alt="gic-logo">
+      <h1 class="text-4xl ">
+        See what our students built!
+      </h1>
+
+      <div class="flex flex-row space-x-4 text-2xl font-semibold items-center ">
+        <div>
+          <p>250+</p>
+          <p>Projects</p>
+        </div>
+        <USeparator orientation="vertical" class="h-20" />
+        <div>
+          <p>250+</p>
+          <p>GICats</p>
+        </div>
+      </div>
+      <br>
+      <h2 class="text-2xl font">
+        for students by students. ₍^.  ̫.^₎
+      </h2>
     </div>
 
-    <div class="relative top-20 w-40 right-20">
+    <div class="relative top-20 w-40 right-20 md:h-300 lg:h-200">
       <div class="relative top-28 left-12">
         <img src="/images/tech/blackhole.png" width="120" alt="">
       </div>
@@ -76,12 +95,7 @@ const php = useHeroRotation({ origin, distance, timeOffset: multiplier[6] * dura
 <style scoped>
 .hero-section {
   display: flex;
-  flex-direction: row;
   /* justify-content: space-around; */
-}
-
-.hero-section > .text {
-  justify-self: left;
 }
 
 .hero-section > .tech-spin {
