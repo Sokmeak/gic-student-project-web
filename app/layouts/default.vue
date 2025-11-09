@@ -23,7 +23,10 @@ const items: NavigationMenuItem[] = [{
         <img src="/images/itc-logo.png" class="h-12 w-auto">
       </template>
     </UHeader>
-    <slot />
+
+    <UMain>
+      <slot />
+    </UMain>
 
     <UFooter>
       <template #left>
