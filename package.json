@@ -21,7 +21,8 @@
     "@nuxtjs/color-mode": "^3.5.2",
     "@pinia/nuxt": "^0.11.3",
     "@vueuse/nuxt": "^14.0.0",
-    "nuxt": "^4.2.0",
+    "motion-v": "^1.7.4",
+    "nuxt": "link:@vueuse/motion/nuxt",
     "vue": "^3.5.22",
     "vue-router": "^4.6.3",
     "zod": "^4.1.12"
