@@ -72,6 +72,10 @@ export default defineNuxtConfig({
       path: "~/components",
       pathPrefix: false,
     },
+    {
+      path: "~/app/components",
+      // pathPrefix: false,
+    },
   ],
 
   ui: {},

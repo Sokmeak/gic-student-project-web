@@ -66,37 +66,16 @@
 
         <!-- Visual Element -->
         <div class="relative hidden lg:block">
-          <div
-            class="relative w-full aspect-square rounded-2xl bg-slate-800 shadow-2xl overflow-hidden"
-          >
-            <!-- Grid pattern -->
-            <div class="absolute inset-0 bg-grid-pattern opacity-10" />
-
-            <!-- Animated circles -->
-            <div
-              class="absolute top-12 left-12 w-24 h-24 bg-white rounded-full opacity-10 animate-pulse"
-            />
-            <div
-              class="absolute bottom-20 right-8 w-32 h-32 border-2 border-white rounded-full opacity-5 animate-spin"
-              style="animation-duration: 20s"
-            />
-            <div
-              class="absolute top-1/3 right-1/4 w-16 h-16 bg-blue-300 rounded-full opacity-20 blur-xl"
-            />
-
-            <!-- Icon showcase -->
-            <div class="absolute inset-0 flex items-center justify-center">
-              <UIcon
-                name="i-heroicons-academic-cap"
-                class="w-32 h-32 text-white opacity-30"
-              />
-            </div>
-          </div>
+          <AppHero />
         </div>
       </div>
     </UContainer>
   </section>
 </template>
+
+<script setup>
+import AppHero from "~/components/app/Hero.vue";
+</script>
 
 <style scoped>
 /* Animations */
