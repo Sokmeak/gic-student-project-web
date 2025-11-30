@@ -41,7 +41,8 @@ const toggleTheme = () => {
 }
 
 // Initialize theme on component mount
-onMounted(() => {
+onMounted(async () => {
+  const { useThemeStore } = await import('@/stores/theme')
   themeStore.value = useThemeStore()
   themeStore.value.initialize()
 })
